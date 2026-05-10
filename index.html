@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chef Kevu — Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#fdf5f5;--warm-white:#fff9f9;--brown:#1e0a0a;--brown-light:#6b2020;--terracotta:#c0272d;--gold:#c9a84c;--text:#1e0a0a;--text-muted:#7a4a4a;--border:#ecd5d5;}
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{font-family:'Lora',serif;background:var(--cream);color:var(--text);}
+  body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,var(--brown),var(--terracotta),var(--gold),var(--terracotta),var(--brown));z-index:200;}
+
+  /* CHINESE DECORATIVE DIVIDER */
+  .chinese-divider{display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.5rem 0;color:var(--gold);}
+  .chinese-divider::before,.chinese-divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+  .chinese-divider span{font-size:1.2rem;letter-spacing:0.5em;opacity:0.7;}
+
+  /* NAV */
+  nav{position:fixed;top:4px;left:0;right:0;z-index:100;background:rgba(250,246,240,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 3rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;color:var(--brown);text-decoration:none;}
+  .nav-logo span{color:var(--terracotta);}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}
+  .nav-links a{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);text-decoration:none;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--terracotta);}
+
+  /* HERO */
+  .hero{padding-top:60px;display:grid;grid-template-columns:1fr 1fr;min-height:92vh;}
+  .hero-content{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 5rem;}
+  .hero-eyebrow{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:1.2rem;}
+  .hero-content h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.6rem);font-style:italic;color:var(--brown);line-height:1.15;margin-bottom:1.4rem;}
+  .hero-content h1 em{font-style:normal;color:var(--terracotta);}
+  .hero-sub{font-size:1rem;line-height:1.9;color:var(--text-muted);max-width:440px;margin-bottom:2.5rem;}
+  .hero-cta{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:white;background:var(--terracotta);padding:0.8rem 2rem;border-radius:2px;text-decoration:none;transition:background 0.2s;}
+  .hero-cta:hover{background:var(--brown);}
+  .hero-img{overflow:hidden;position:relative;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;}
+
+  /* FEATURED STRIP */
+  .featured-strip{background:var(--brown);padding:1.2rem 5rem;display:flex;align-items:center;gap:3rem;overflow-x:auto;}
+  .strip-label{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap;flex-shrink:0;}
+  .strip-items{display:flex;gap:3rem;list-style:none;}
+  .strip-items li{font-family:'Lora',serif;font-style:italic;font-size:0.88rem;color:rgba(255,255,255,0.55);white-space:nowrap;}
+  .strip-items li span{color:rgba(255,255,255,0.9);}
+
+  /* ABOUT / BIO */
+  .about-section{background:var(--warm-white);padding:7rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+  .about-photo{border-radius:3px;}
+  .about-photo img{width:100%;height:550px;object-fit:cover;object-position:center center;border-radius:3px;}
+  .about-text{}
+  .about-section .col-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:1rem;}
+  .about-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.5vw,2.4rem);color:var(--brown);line-height:1.2;margin-bottom:1.5rem;}
+  .about-section p{font-size:0.97rem;line-height:1.95;color:var(--text-muted);margin-bottom:1rem;}
+  .about-section p:last-child{margin-bottom:0;}
+
+  /* COMPETITION / STORY */
+  .story-section{background:var(--brown);color:white;padding:6rem 5rem;display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center;}
+  .story-section .col-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+  .story-section h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,2.5vw,2.4rem);margin-bottom:1.5rem;line-height:1.2;}
+  .story-section p{font-size:0.97rem;line-height:1.95;color:rgba(255,255,255,0.72);margin-bottom:1rem;}
+  .story-section p:last-child{margin-bottom:0;}
+  .story-milestones{display:flex;flex-direction:column;gap:1.5rem;}
+  .milestone{padding:1.5rem;border:1px solid rgba(255,255,255,0.1);border-radius:3px;background:rgba(255,255,255,0.04);}
+  .milestone .year{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);font-weight:700;margin-bottom:0.3rem;}
+  .milestone .event{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.85);margin-bottom:0.4rem;}
+  .milestone .detail{font-size:0.82rem;line-height:1.65;color:rgba(255,255,255,0.5);}
+
+  /* PHILOSOPHY */
+  .philosophy-section{background:var(--cream);padding:6rem 5rem;text-align:center;}
+  .philosophy-section .col-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:1rem;}
+  .philosophy-section blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,2.5vw,2rem);color:var(--brown);line-height:1.5;max-width:700px;margin:0 auto 1.5rem;}
+  .philosophy-section .attribution{font-family:'DM Sans',sans-serif;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;}
+  .philosophy-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;max-width:900px;margin-left:auto;margin-right:auto;}
+  .pillar{padding:2rem;background:var(--warm-white);border:1px solid var(--border);border-radius:3px;text-align:left;}
+  .pillar .pillar-icon{font-size:1.5rem;margin-bottom:1rem;}
+  .pillar h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown);margin-bottom:0.6rem;}
+  .pillar p{font-size:0.85rem;line-height:1.75;color:var(--text-muted);}
+
+  /* RECIPES */
+  .recipes-section{background:var(--warm-white);padding:6rem 5rem;}
+  .recipes-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;}
+  .recipes-header .col-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:0.5rem;}
+  .recipes-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.5vw,2.4rem);color:var(--brown);}
+  .recipes-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;}
+  .recipe-card{display:block;text-decoration:none;background:var(--cream);border:1px solid var(--border);border-radius:3px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
+  .recipe-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(61,43,31,0.12);}
+  .recipe-card img{width:100%;object-fit:cover;filter:sepia(5%);}
+  .recipe-card.featured img{height:280px;}
+  .recipe-card.small img{height:180px;}
+  .recipe-card-body{padding:1.3rem;}
+  .recipe-card-meta{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--terracotta);margin-bottom:0.5rem;}
+  .recipe-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--brown);line-height:1.3;margin-bottom:0.5rem;}
+  .recipe-card.featured h3{font-size:1.25rem;}
+  .recipe-card p{font-size:0.82rem;line-height:1.7;color:var(--text-muted);}
+  .coming-soon{opacity:0.5;cursor:default;pointer-events:none;}
+  .coming-soon-badge{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);background:var(--border);display:inline-block;padding:0.15rem 0.5rem;border-radius:2px;margin-left:0.5rem;vertical-align:middle;}
+  .recipe-img-placeholder{background:var(--border);display:flex;align-items:center;justify-content:center;}
+  .recipe-img-placeholder.h280{height:280px;}
+  .recipe-img-placeholder.h180{height:180px;}
+  .recipe-img-placeholder span{font-family:'DM Sans',sans-serif;font-size:0.7rem;color:var(--text-muted);text-align:center;padding:1rem;}
+
+  /* CONTACT */
+  .contact-section{background:var(--brown);color:white;padding:6rem 5rem;}
+  .contact-inner{max-width:620px;margin:0 auto;text-align:center;}
+  .contact-section .col-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+  .contact-section h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,2.5vw,2.4rem);margin-bottom:1rem;}
+  .contact-section p{font-size:0.97rem;line-height:1.9;color:rgba(255,255,255,0.65);margin-bottom:2.5rem;}
+  .contact-form{display:flex;flex-direction:column;gap:1rem;text-align:left;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .form-group{display:flex;flex-direction:column;gap:0.4rem;}
+  .form-group label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);}
+  .form-group input,.form-group textarea{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:2px;padding:0.75rem 1rem;color:white;font-family:'Lora',serif;font-size:0.9rem;transition:border-color 0.2s;resize:vertical;}
+  .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.25);}
+  .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);}
+  .form-submit{align-self:center;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown);background:var(--gold);border:none;padding:0.9rem 2.5rem;border-radius:2px;cursor:pointer;transition:background 0.2s;margin-top:0.5rem;}
+  .form-submit:hover{background:#d4b55a;}
+
+  /* FOOTER */
+  footer{background:var(--brown);padding:2.5rem 5rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.07);}
+  .footer-logo{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:white;}
+  .footer-nav{display:flex;gap:2rem;list-style:none;}
+  .footer-nav a{font-family:'DM Sans',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+  .footer-nav a:hover{color:rgba(255,255,255,0.7);}
+  .footer-copy{font-family:'DM Sans',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.25);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Chef <span>Kevu</span></a>
+  <ul class="nav-links">
+    <li><a href="#bio">About</a></li>
+    <li><a href="#recipes">Recipes</a></li>
+    <li><a href="#contact">Newsletter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Chef Kevu</div>
+    <h1>What's Up, I'm Kevu.</h1>
+    <p class="hero-sub">I'm learning to cook one dish at a time, starting with the flavors I grew up around. This blog is where I share recipes, food memories, and the meals inspired by my parents' cooking.</p>
+    <a href="#recipes" class="hero-cta">Recipes</a>
+  </div>
+  <div class="hero-img">
+    <img src="kevin-hero.jpg" alt="Chef Kevin in the kitchen">
+  </div>
+</section>
+
+<!-- STRIP -->
+
+<!-- ABOUT / BIO -->
+<div class="chinese-divider"><span>❖ 家 ❖</span></div>
+<section class="about-section" id="bio">
+  <div class="about-text">
+    <div class="col-label">About Chef Kevu</div>
+    <h2>Hi, I'm Kevin. <span style="font-size:1rem;font-style:italic;color:var(--text-muted);font-weight:400;">(all my friends call me Kevu)</span></h2>
+    <p>I'm a 20 year old college student from Minneapolis who grew up eating the best Chinese food. This food was made every weekend by my parents. This site is my way to learn how to make it myself and share what I figure out along the way!</p>
+    <p>My parents both grew up in Shandong province, northeast of China. This is where my mom's family has been passing down the same recipes for three generations. After they got married, they packed up and moved to America. Everything was new for them, a new country, new language, new culture, but what never changed was their cooking.</p>
+    <p>At home, the weekends were never quiet in the kitchen. My mom would be at the counter early, with flour on her hands. She would be folding dumplings the way her mother taught her. She doesn't need a recipe, measuring cups, she does it off feel and memory. My dad on the other hand was my mom's sous chef. He handles the prep, using his fast elegant knife skills.</p>
+    <p>I started helping in the kitchen around age 8. I mostly got in the way. But I kept showing up every weekend and eventually started learning how the dough should feel, when something needed more time, and how to blend ingredients together. Cooking in our house was never formally taught. I learned through watching, trying, and trying again.</p>
+    <p>Now that I'm 20, I have started to realize that no one is here to record my family's recipes. They live in memory, habit, and repetition. This is why I wanted to create this site, to document these delicious dishes that everyone should be able to enjoy. It is also a way for me to learn how to make them myself and master my own cooking skills. More than anything, I hope that these recipes bring the same joy to you that they brought me with my family.</p>
+  </div>
+  <div class="about-photo">
+    <figure style="margin:0;">
+      <img src="kevin-portrait.png" alt="Kevin and his mom cooking together">
+      <figcaption style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;font-style:italic;">Me cooking with my mom, 2022</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- COMPETITION / MY STORY -->
+<section class="story-section" id="competition">
+  <div>
+    <div class="col-label">A word from my mom</div>
+    <h2>"When you can cook these dishes yourself, you carry a piece of home with you wherever you go."</h2>
+    <p>Right before I left for college, this is what my mom told me. This site is my proof of collecting these pieces.</p>
+  </div>
+  <div></div>
+</section>
+
+
+<!-- RECIPES -->
+<div class="chinese-divider"><span>❖ 食 ❖</span></div>
+<section class="recipes-section" id="recipes">
+  <div class="recipes-header">
+    <div>
+      <div class="col-label">From the kitchen</div>
+      <h2>Recipes</h2>
+    </div>
+  </div>
+  <div class="recipes-grid">
+    <!-- Featured: real recipe with real photo -->
+    <a href="beef-stew.html" class="recipe-card">
+      <img src="beef_final.jpg" alt="Braised beef with carrots, potatoes, and mushrooms" style="width:100%;height:200px;object-fit:cover;">
+      <div class="recipe-card-body">
+        <div class="recipe-card-meta">Mains · Beef · ~1 hr</div>
+        <h3>Carrot, Potato & Mushroom Braised Beef</h3>
+        <p>The dish that fills your whole home before it's even done.</p>
+      </div>
+    </a>
+    <a href="dumplings.html" class="recipe-card">
+      <img src="dumpling_final.png" alt="Mom's dumplings" style="width:100%;height:200px;object-fit:cover;">
+      <div class="recipe-card-body">
+        <div class="recipe-card-meta">Mains · Pork · ~2 hrs</div>
+        <h3>Mom's Dumplings</h3>
+        <p>Homemade from scratch, dough and all. One of the hardest and most rewarding things I've learned to make.</p>
+      </div>
+    </a>
+    <a href="tomato-eggs.html" class="recipe-card">
+      <img src="tomato_final.png" alt="Tomato and eggs" style="width:100%;height:200px;object-fit:cover;">
+      <div class="recipe-card-body">
+        <div class="recipe-card-meta">Mains · Eggs · 20 min</div>
+        <h3>Tomato & Eggs</h3>
+        <p>A classic Chinese home dish. Sweet, tangy tomatoes with soft scrambled eggs in one pan.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="col-label">Stay in the loop</div>
+    <h2>Get new recipes in your inbox.</h2>
+    <p>I'll post whenever I figure out something worth sharing. Sign up and I'll let you know when there's a new recipe up!</p>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com">
+        </div>
+      </div>
+      <button type="submit" class="form-submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Chef Kevu</div>
+  <ul class="footer-nav">
+    <li><a href="#bio">About</a></li>
+    <li><a href="#recipes">Recipes</a></li>
+    <li><a href="#contact">Newsletter</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Chef Kevu · Minneapolis, MN</div>
+</footer>
+
+</body>
+</html>

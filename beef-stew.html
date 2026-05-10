@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrot, Potato & Mushroom Braised Beef | Chef Kevu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#fdf5f5;--warm-white:#fff9f9;--brown:#1e0a0a;--brown-light:#6b2020;--terracotta:#c0272d;--gold:#c9a84c;--text:#1e0a0a;--text-muted:#7a4a4a;--border:#ecd5d5;}
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{font-family:'Lora',serif;background:var(--cream);color:var(--text);}
+  body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,var(--brown),var(--terracotta),var(--gold),var(--terracotta),var(--brown));z-index:200;}
+  nav{position:fixed;top:4px;left:0;right:0;z-index:100;background:rgba(250,246,240,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 3rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;color:var(--brown);text-decoration:none;}
+  .nav-logo span{color:var(--terracotta);}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}
+  .nav-links a{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);text-decoration:none;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--terracotta);}
+
+  /* HERO */
+  .recipe-hero{padding-top:60px;display:grid;grid-template-columns:1fr 1fr;min-height:75vh;}
+  .recipe-hero-content{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 5rem;}
+  .recipe-hero-img{overflow:hidden;}
+  .recipe-hero-img img{width:100%;height:100%;object-fit:cover;}
+
+  .breadcrumb{font-family:'DM Sans',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.2rem;}
+  .breadcrumb a{color:var(--terracotta);text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  .recipe-tag-row{display:flex;gap:0.6rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+  .tag{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;}
+  .tag-category{background:rgba(193,96,58,0.09);color:var(--terracotta);}
+
+  .recipe-hero-content h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);color:var(--brown);line-height:1.15;margin-bottom:1.2rem;}
+  .recipe-intro{font-size:1rem;line-height:1.85;color:var(--text-muted);margin-bottom:2rem;max-width:460px;}
+
+  .recipe-stats{display:flex;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .stat{text-align:center;}
+  .stat .val{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--terracotta);font-weight:700;}
+  .stat .lbl{font-family:'DM Sans',sans-serif;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-top:0.2rem;}
+
+  /* STORY */
+  .story-section{background:var(--brown);color:white;padding:4rem 5rem;}
+  .story-inner{max-width:700px;margin:0 auto;}
+  .story-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+  .story-section h2{font-family:'Playfair Display',serif;font-style:italic;font-size:1.8rem;margin-bottom:1.5rem;}
+  .story-section p{font-size:0.97rem;line-height:1.95;color:rgba(255,255,255,0.75);margin-bottom:1rem;}
+  .story-section p:last-child{margin-bottom:0;}
+
+  /* RECIPE BODY */
+  .recipe-body{padding:5rem;display:grid;grid-template-columns:1fr 1.6fr;gap:5rem;background:var(--warm-white);align-items:start;}
+  .ingredients-col{position:sticky;top:80px;}
+  .col-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:1.2rem;}
+  .ingredient-group{margin-bottom:2rem;}
+  .ingredient-group h4{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--brown);margin-bottom:0.75rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem;}
+  .ingredient-item{display:flex;justify-content:space-between;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid rgba(232,221,212,0.5);font-size:0.9rem;}
+  .ingredient-item .ing-name{color:var(--text);}
+  .ingredient-item .ing-amount{font-family:'DM Sans',sans-serif;font-size:0.8rem;color:var(--terracotta);font-weight:500;}
+  .ing-note{margin-top:1rem;padding:0.9rem 1rem;background:rgba(193,96,58,0.07);border-left:3px solid var(--terracotta);font-size:0.82rem;line-height:1.7;color:var(--text-muted);border-radius:0 2px 2px 0;}
+
+  /* STEPS */
+  .step{display:grid;grid-template-columns:2.5rem 1fr;gap:1.2rem;margin-bottom:2.5rem;align-items:start;}
+  .step-num{width:2.5rem;height:2.5rem;background:var(--terracotta);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;flex-shrink:0;}
+  .step-content h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--brown);margin-bottom:0.5rem;}
+  .step-content p{font-size:0.92rem;line-height:1.85;color:var(--text-muted);}
+  .step-content .tip{margin-top:0.75rem;padding:0.75rem 1rem;background:rgba(201,168,76,0.1);border-left:3px solid var(--gold);font-size:0.82rem;line-height:1.65;color:var(--text-muted);border-radius:0 2px 2px 0;}
+
+  /* SECTION DIVIDER */
+  .step-section-label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin:2rem 0 1.5rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+
+  /* PROCESS PHOTOS */
+  .process-section{padding:5rem;background:var(--cream);}
+  .process-section h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--brown);margin-bottom:0.5rem;}
+  .process-section .sub{font-size:0.9rem;color:var(--text-muted);margin-bottom:2.5rem;}
+  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+  .process-item img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:3px;border:1px solid var(--border);}
+  .process-item .caption{font-family:'DM Sans',sans-serif;font-size:0.72rem;color:var(--text-muted);font-style:italic;margin-top:0.5rem;line-height:1.5;}
+
+  /* MORE */
+  .more-section{padding:5rem;background:var(--warm-white);}
+  .more-section h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--brown);margin-bottom:2rem;}
+  .more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .more-card{background:var(--cream);border:1px solid var(--border);border-radius:3px;overflow:hidden;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;}
+  .more-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(61,43,31,0.1);}
+  .more-card img{width:100%;height:160px;object-fit:cover;filter:sepia(8%);}
+  .more-card-body{padding:1.1rem;}
+  .more-card-tag{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--terracotta);margin-bottom:0.4rem;}
+  .more-card h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown);line-height:1.3;}
+
+  /* COMMENTS */
+  .comments-section{padding:5rem;background:var(--warm-white);}
+  .comments-section h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--brown);margin-bottom:0.4rem;}
+  .comments-count{font-family:'DM Sans',sans-serif;font-size:0.8rem;color:var(--text-muted);margin-bottom:2.5rem;}
+  .comment{display:flex;gap:1.2rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
+  .comment:last-child{border-bottom:none;margin-bottom:0;}
+  .comment-avatar{width:42px;height:42px;border-radius:50%;background:var(--terracotta);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:white;font-weight:700;flex-shrink:0;}
+  .comment-body{}
+  .comment-meta{display:flex;align-items:center;gap:1rem;margin-bottom:0.4rem;}
+  .comment-name{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;color:var(--brown);}
+  .comment-date{font-family:'DM Sans',sans-serif;font-size:0.72rem;color:var(--text-muted);}
+  .comment-stars{color:var(--gold);font-size:0.75rem;letter-spacing:0.05em;}
+  .comment-text{font-size:0.9rem;line-height:1.75;color:var(--text-muted);}
+  .comment-form-section{margin-top:3rem;padding-top:2.5rem;border-top:2px solid var(--border);}
+  .comment-form-section h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--brown);margin-bottom:1.5rem;}
+  .comment-form{display:flex;flex-direction:column;gap:1rem;max-width:600px;}
+  .comment-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .comment-form-group{display:flex;flex-direction:column;gap:0.4rem;}
+  .comment-form-group label{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);}
+  .comment-form-group input,.comment-form-group textarea{background:var(--cream);border:1px solid var(--border);border-radius:2px;padding:0.75rem 1rem;color:var(--text);font-family:'Lora',serif;font-size:0.9rem;transition:border-color 0.2s;resize:vertical;}
+  .comment-form-group input:focus,.comment-form-group textarea:focus{outline:none;border-color:var(--terracotta);}
+  .comment-form-group input::placeholder,.comment-form-group textarea::placeholder{color:var(--text-muted);opacity:0.6;}
+  .comment-submit{align-self:flex-start;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:white;background:var(--terracotta);border:none;padding:0.85rem 2rem;border-radius:2px;cursor:pointer;transition:background 0.2s;}
+  .comment-submit:hover{background:var(--brown);}
+
+  footer{background:var(--brown);padding:2.5rem 5rem;display:flex;align-items:center;justify-content:space-between;}
+  .footer-logo{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:white;}
+  .footer-copy{font-family:'DM Sans',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.35);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Chef <span>Kevu</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#bio">About</a></li>
+    <li><a href="index.html#recipes">Recipes</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="recipe-hero">
+  <div class="recipe-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> → <a href="index.html#recipes">Recipes</a> → Mains · <span>April 10, 2025</span></div>
+    <div class="recipe-tag-row">
+      <span class="tag tag-category">Mains</span>
+      <span class="tag tag-category">Beef</span>
+      <span class="tag tag-category">~1 hr</span>
+    </div>
+    <h1>Carrot, Potato & Mushroom Braised Beef</h1>
+    <p class="recipe-intro">This is one of those dishes that fill your whole home before its done. My mom made it on weekends when she had the time to let it sit. What I love about this dish is the mix in textures. The beef gets tender, the mushrooms stay a little chewy, and the carrots and potatoes soak up the sauce and become sweet. Every bite is a little different. This is not really a dish you can rush, which I think is what makes it special.</p>
+    <div class="recipe-stats">
+      <div class="stat"><div class="val">~1 hr</div><div class="lbl">Total Time</div></div>
+      <div class="stat"><div class="val">15 min</div><div class="lbl">Prep</div></div>
+      <div class="stat"><div class="val">4</div><div class="lbl">Servings</div></div>
+      <div class="stat"><div class="val">Easy</div><div class="lbl">Difficulty</div></div>
+    </div>
+  </div>
+  <div class="recipe-hero-img">
+    <img src="beef_final.jpg" alt="Carrot potato mushroom braised beef over white rice">
+  </div>
+</section>
+
+<!-- RECIPE BODY -->
+<section class="recipe-body">
+  <div class="ingredients-col">
+    <div class="col-label">Ingredients</div>
+    <div class="ingredient-group">
+      <h4>Main</h4>
+      <div class="ingredient-item"><span class="ing-name">Beef tenderloin</span><span class="ing-amount">500g</span></div>
+      <div class="ingredient-item"><span class="ing-name">Potatoes, cut into chunks</span><span class="ing-amount">2 medium</span></div>
+      <div class="ingredient-item"><span class="ing-name">Carrot, sliced into rounds</span><span class="ing-amount">1 large</span></div>
+      <div class="ingredient-item"><span class="ing-name">Dried wood ear mushrooms, soaked</span><span class="ing-amount">large handful</span></div>
+      <div class="ingredient-item"><span class="ing-name">Star anise</span><span class="ing-amount">3 pieces</span></div>
+      <div class="ingredient-item"><span class="ing-name">Fresh ginger, sliced</span><span class="ing-amount">3 slices</span></div>
+      <div class="ingredient-item"><span class="ing-name">Green onion, large pieces</span><span class="ing-amount">1 stalk</span></div>
+      <div class="ingredient-item"><span class="ing-name">Soy sauce</span><span class="ing-amount">2 tbsp</span></div>
+      <div class="ingredient-item"><span class="ing-name">Dark soy sauce</span><span class="ing-amount">1 tbsp</span></div>
+      <div class="ingredient-item"><span class="ing-name">Salt</span><span class="ing-amount">to taste</span></div>
+      <div class="ingredient-item"><span class="ing-name">Vegetable oil</span><span class="ing-amount">2 tbsp</span></div>
+    </div>
+    <div class="ing-note">💡 Soak dried wood ear mushrooms in cold water for at least 30 minutes before cooking. They'll expand a lot.</div>
+  </div>
+
+  <div class="steps-col">
+    <div class="col-label">Instructions</div>
+
+    <div class="step-section-label">The Prep</div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Slice the beef</h4>
+        <p>Slice beef tenderloin into medium pieces (not too thin).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Prep everything</h4>
+        <p>Prep everything before you start cooking. Slice the potatoes and carrots, cut the green onion and ginger into large pieces, and soak your wood ear mushrooms until soft.</p>
+      </div>
+    </div>
+
+    <div class="step-section-label">Building the Braise</div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Bloom the star anise</h4>
+        <p>Heat oil in a Dutch oven or heavy pot over medium high heat. Add star anise and let them sizzle in the oil for 30 seconds until fragrant.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Brown the beef</h4>
+        <p>Add beef and stir continuously until the color changes on all sides (about 3 mins).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>Season</h4>
+        <p>Add green onion, ginger, soy sauce, and dark soy sauce. Stir to mix everything thoroughly.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h4>First simmer</h4>
+        <p>Cover and simmer on medium heat for 20 minutes.</p>
+      </div>
+    </div>
+
+    <div class="step-section-label">The Vegetables</div>
+
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <h4>Add the mushrooms</h4>
+        <p>Add the wood ear mushrooms and stir in. Cover and simmer another 20 minutes.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-content">
+        <h4>Add the vegetables</h4>
+        <p>Test taste the beef. When it's tender, add the carrots and turnip (add salt if needed).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">9</div>
+      <div class="step-content">
+        <h4>Final simmer & serve</h4>
+        <p>Cover and simmer a final 10 minutes until the vegetables are cooked through. Serve with white rice (or your choice).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS PHOTOS -->
+<section class="process-section">
+  <h2>How it comes together</h2>
+  <p class="sub">Photos from my kitchen</p>
+  <div class="process-grid">
+    <div class="process-item">
+      <img src="beef_step1_raw.jpg" alt="Raw beef tenderloin sliced">
+      <div class="caption">Beef tenderloin cut into medium slices, not too thin</div>
+    </div>
+    <div class="process-item">
+      <img src="beef_step2_ingredients.jpg" alt="All ingredients prepped">
+      <div class="caption">Everything prepped before the heat goes on</div>
+    </div>
+    <div class="process-item">
+      <img src="beef_step3_anise.jpg" alt="Star anise in oil">
+      <div class="caption">Star anise blooming in the oil, this is where the flavor starts</div>
+    </div>
+    <div class="process-item">
+      <img src="beef_step4_mushrooms.jpg" alt="Wood ear mushrooms added">
+      <div class="caption">Wood ear mushrooms in after the first 20 minute simmer</div>
+    </div>
+    <div class="process-item">
+      <img src="beef_step5_vegetables.jpg" alt="Carrots and potatoes added">
+      <div class="caption">Carrots and potato go in last, they don't need as much time</div>
+    </div>
+    <div class="process-item">
+      <img src="beef_final.jpg" alt="Finished braised beef over rice">
+      <div class="caption">Finished. Served over white rice. Worth the wait.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENTS -->
+<section class="comments-section">
+  <h2>Comments</h2>
+  <p class="comments-count">3 comments</p>
+
+  <div class="comment">
+    <div class="comment-avatar">S</div>
+    <div class="comment-body">
+      <div class="comment-meta">
+        <span class="comment-name">Sarah M.</span>
+        <span class="comment-date">April 14, 2025</span>
+        <span class="comment-stars">★★★★★</span>
+      </div>
+      <p class="comment-text">Made this last weekend and it was incredible!</p>
+    </div>
+  </div>
+
+  <div class="comment">
+    <div class="comment-avatar">M</div>
+    <div class="comment-body">
+      <div class="comment-meta">
+        <span class="comment-name">Maya L.</span>
+        <span class="comment-date">April 25, 2025</span>
+        <span class="comment-stars">★★★★☆</span>
+      </div>
+      <p class="comment-text">Really good recipe, easy to follow. I couldn't find wood ear mushrooms at my grocery store so I used a different mushroom instead and it still turned out great.</p>
+    </div>
+  </div>
+
+  <div class="comment">
+    <div class="comment-avatar">D</div>
+    <div class="comment-body">
+      <div class="comment-meta">
+        <span class="comment-name">David K.</span>
+        <span class="comment-date">May 2, 2026</span>
+        <span class="comment-stars">★★★★★</span>
+      </div>
+      <p class="comment-text">The cold water method for the dumplings on your other recipe brought me here. This braised beef is next level. Made it for my family and everyone went back for seconds. Your mom's recipes are the real deal.</p>
+    </div>
+  </div>
+
+  <div class="comment-form-section">
+    <h3>Leave a comment</h3>
+    <form class="comment-form" onsubmit="return false;">
+      <div class="comment-form-row">
+        <div class="comment-form-group">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" placeholder="Your name">
+        </div>
+        <div class="comment-form-group">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="comment-form-group">
+        <label for="cf-comment">Comment</label>
+        <textarea id="cf-comment" rows="4" placeholder="What did you think?"></textarea>
+      </div>
+      <button type="submit" class="comment-submit">Post comment</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Chef Kevu</div>
+  <div class="footer-copy">© 2024 Chef Kevu · Minneapolis, MN</div>
+</footer>
+
+</body>
+</html>
